@@ -1,0 +1,169 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* --- shadcn (New York, zinc) tokens --- */
+@layer base {
+  :root {
+    --font-sans: "Manrope", "Segoe UI", "Inter", sans-serif;
+    --font-brand: "Space Grotesk", "Manrope", "Segoe UI", sans-serif;
+    --background: 240 6% 6%;
+    --foreground: 0 0% 98%;
+
+    --card: 240 6% 8%;
+    --card-foreground: 0 0% 98%;
+
+    --popover: 240 6% 7%;
+    --popover-foreground: 0 0% 98%;
+
+    --primary: 0 0% 98%;
+    --primary-foreground: 240 6% 8%;
+
+    --secondary: 240 5% 13%;
+    --secondary-foreground: 0 0% 98%;
+
+    --muted: 240 4% 14%;
+    --muted-foreground: 240 5% 65%;
+
+    --accent: 240 5% 14%;
+    --accent-foreground: 0 0% 98%;
+
+    --destructive: 0 72% 45%;
+    --destructive-foreground: 0 0% 98%;
+
+    --border: 240 5% 14%;
+    --input: 240 5% 14%;
+    --ring: 190 90% 55%;
+
+    --radius: 14px;
+
+    /* Surface tokens (subtle) */
+    --surface-1: rgba(255, 255, 255, 0.045);
+    --surface-2: rgba(255, 255, 255, 0.065);
+    --surface-border: rgba(255, 255, 255, 0.10);
+
+    /* Accent (only for CTA / highlights) */
+    --accent-a: rgba(34, 211, 238, 0.95);
+    --accent-b: rgba(56, 189, 248, 0.85);
+    --accent-c: rgba(99, 102, 241, 0.80);
+  }
+
+  .dark {
+    --background: 240 6% 6%;
+    --foreground: 0 0% 98%;
+  }
+
+  html,
+  body {
+    height: 100%;
+  }
+
+  body {
+    font-family: var(--font-sans);
+    background: radial-gradient(1200px circle at 20% 10%, rgba(34, 211, 238, 0.12), transparent 55%),
+      radial-gradient(900px circle at 85% 18%, rgba(217, 70, 239, 0.10), transparent 55%),
+      radial-gradient(900px circle at 50% 88%, rgba(16, 185, 129, 0.08), transparent 55%),
+      linear-gradient(180deg, rgba(255, 255, 255, 0.05), transparent 18%, transparent 84%, rgba(255, 255, 255, 0.045)),
+      #05060a;
+    color: hsl(var(--foreground));
+  }
+
+  /* --- Premium Starfield: CSS + SVG layers (fixed, no layout impact) --- */
+  html::before,
+  html::after {
+    content: "";
+    position: fixed;
+    inset: 0;
+    z-index: -1;
+    pointer-events: none;
+    background-repeat: repeat;
+    background-position: center;
+    transform: translateZ(0);
+  }
+
+  /* Stars layer (subtle twinkle) */
+  html::before {
+    opacity: 0.55;
+    background-size: 520px 520px;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='520' height='520' viewBox='0 0 520 520'%3E%3Crect width='520' height='520' fill='none'/%3E%3Cg fill='%23ffffff'%3E%3Ccircle cx='34' cy='62' r='1.2' opacity='.55'/%3E%3Ccircle cx='88' cy='118' r='1.0' opacity='.38'/%3E%3Ccircle cx='140' cy='40' r='0.9' opacity='.26'/%3E%3Ccircle cx='210' cy='92' r='1.6' opacity='.62'/%3E%3Ccircle cx='270' cy='58' r='0.9' opacity='.22'/%3E%3Ccircle cx='318' cy='140' r='1.1' opacity='.40'/%3E%3Ccircle cx='410' cy='88' r='1.3' opacity='.50'/%3E%3Ccircle cx='470' cy='150' r='0.9' opacity='.24'/%3E%3Ccircle cx='60' cy='220' r='1.5' opacity='.58'/%3E%3Ccircle cx='132' cy='260' r='0.9' opacity='.22'/%3E%3Ccircle cx='206' cy='248' r='1.1' opacity='.40'/%3E%3Ccircle cx='290' cy='240' r='0.9' opacity='.22'/%3E%3Ccircle cx='360' cy='280' r='1.6' opacity='.62'/%3E%3Ccircle cx='454' cy='260' r='1.0' opacity='.35'/%3E%3Ccircle cx='92' cy='360' r='1.2' opacity='.45'/%3E%3Ccircle cx='170' cy='410' r='0.9' opacity='.22'/%3E%3Ccircle cx='252' cy='372' r='1.7' opacity='.65'/%3E%3Ccircle cx='338' cy='410' r='1.0' opacity='.34'/%3E%3Ccircle cx='430' cy='396' r='1.2' opacity='.46'/%3E%3Ccircle cx='480' cy='448' r='0.9' opacity='.22'/%3E%3Ccircle cx='40' cy='470' r='1.0' opacity='.34'/%3E%3Ccircle cx='120' cy='480' r='0.9' opacity='.22'/%3E%3Ccircle cx='210' cy='468' r='1.1' opacity='.40'/%3E%3Ccircle cx='300' cy='500' r='1.4' opacity='.55'/%3E%3Ccircle cx='392' cy='474' r='0.9' opacity='.22'/%3E%3Ccircle cx='468' cy='508' r='1.0' opacity='.34'/%3E%3C/g%3E%3C/svg%3E");
+    animation: t2sql-twinkle 10s ease-in-out infinite;
+    mix-blend-mode: screen;
+  }
+
+  /* Constellation lines layer */
+  html::after {
+    opacity: 0.22;
+    background-size: 720px 720px;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='720' height='720' viewBox='0 0 720 720'%3E%3Crect width='720' height='720' fill='none'/%3E%3Cg fill='none' stroke='%23ffffff' stroke-width='1'%3E%3Cg opacity='.10'%3E%3Cpath d='M90 140 L160 110 L230 150 L300 120'/%3E%3Cpath d='M420 180 L470 140 L540 160 L600 120'/%3E%3Cpath d='M140 420 L210 380 L260 430 L320 390'/%3E%3Cpath d='M430 470 L500 430 L560 500 L620 460'/%3E%3C/g%3E%3Cg opacity='.06'%3E%3Cpath d='M80 610 L150 560 L220 600'/%3E%3Cpath d='M420 620 L500 560 L640 600'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+    mix-blend-mode: screen;
+  }
+
+  @keyframes t2sql-twinkle {
+    0% {
+      opacity: 0.50;
+    }
+    50% {
+      opacity: 0.62;
+    }
+    100% {
+      opacity: 0.50;
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    html::before {
+      animation: none;
+    }
+  }
+}
+
+.font-brand {
+  font-family: var(--font-brand);
+}
+
+/* --- helpers (optional, but handy) --- */
+@layer components {
+  .surface-card {
+    @apply border border-white/10 bg-white/5 shadow-[0_30px_120px_rgba(0,0,0,0.45)] backdrop-blur-2xl;
+  }
+
+  .surface-soft {
+    background: var(--surface-1);
+    border: 1px solid var(--surface-border);
+  }
+
+  .cta-accent {
+    background: linear-gradient(90deg, var(--accent-a), var(--accent-b), var(--accent-c));
+  }
+
+  /* Custom scrollbar styles */
+  .scrollbar-custom {
+    scrollbar-width: thin;
+    scrollbar-color: rgba(255, 255, 255, 0.3) rgba(255, 255, 255, 0.05);
+  }
+
+  .scrollbar-custom::-webkit-scrollbar {
+    width: 14px;
+    height: 14px;
+  }
+
+  .scrollbar-custom::-webkit-scrollbar-track {
+    background: rgba(255, 255, 255, 0.05);
+    border-radius: 10px;
+    margin: 4px;
+  }
+
+  .scrollbar-custom::-webkit-scrollbar-thumb {
+    background: rgba(255, 255, 255, 0.3);
+    border-radius: 10px;
+    border: 3px solid rgba(255, 255, 255, 0.05);
+  }
+
+  .scrollbar-custom::-webkit-scrollbar-thumb:hover {
+    background: rgba(255, 255, 255, 0.5);
+  }
+
+  .scrollbar-custom::-webkit-scrollbar-corner {
+    background: rgba(255, 255, 255, 0.05);
+  }
+}
