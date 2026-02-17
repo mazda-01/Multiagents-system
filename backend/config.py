@@ -22,10 +22,8 @@ GROQ_API_KEY = os.getenv("GROQ_API_KEY")
 QDRANT_API = os.getenv("QDRANT_API")
 QDRANT_URL = os.getenv("QDRANT_URL")
 
-# Универсальный способ: можно передать готовый DSN/URL подключения.
 DB_DSN = os.getenv("DATABASE_URL") or os.getenv("DB_URL")
 
-# Fallback на классические переменные.
 DB_HOST = os.getenv("DB_HOST") or os.getenv("POSTGRES_HOST") or "127.0.0.1"
 DB_PORT = _get_int("DB_PORT", _get_int("POSTGRES_PORT", 5432))
 DB_NAME = os.getenv("DB_NAME") or os.getenv("POSTGRES_DB")

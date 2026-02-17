@@ -200,7 +200,6 @@ async def db_connect(request: DbConnectRequest):
                 "password": profile.password or "",
             }
         )
-        # Переключаемся на коллекцию кэша для новой БД (создастся при отсутствии).
         qdrant.get_active_vectorstore()
         agent_graph_module.DB_SCHEMA = database.DB_SCHEMA
         graph = build_graph()

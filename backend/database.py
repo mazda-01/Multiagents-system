@@ -54,7 +54,6 @@ def _is_connection_error(error: Exception) -> bool:
 def _get_healthy_connection(max_retries: int = 1):
     global db_pool
     if db_pool is None:
-        # Auto-heal pool on accidental drop/reload using last known config (or env defaults).
         init_database_pool(_db_config or None)
 
     last_error: Exception | None = None
@@ -150,14 +149,12 @@ def get_cache_namespace() -> str:
             query_db = (qs.get("dbname") or qs.get("database") or [""])[0]
             database = path_db or query_db or database
         except Exception:
-            # Если DSN нестандартный, fallback на общий namespace.
             pass
     else:
         host = str(cfg.get("host") or host)
         port = str(cfg.get("port") or port)
         database = str(cfg.get("database") or database)
 
-    # Одна физическая БД = одна коллекция (host:port:database), независимо от профиля/пользователя.
     raw = f"{host}:{port}/{database}"
     digest = hashlib.sha1(raw.encode("utf-8")).hexdigest()
     unique_number = int(digest[:12], 16) % 1_000_000_000
@@ -191,7 +188,6 @@ def shutdown_database_pool():
     if db_pool:
         db_pool.closeall()
         db_pool = None
-    # Explicit disconnect should not be auto-recovered unless user reconnects.
     _db_config = {}
     _last_good_db_status = None
     _last_good_db_status_ts = None
